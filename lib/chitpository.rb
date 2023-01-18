@@ -104,13 +104,13 @@ class Chitpository
 
     def post(peep)
         sql = "INSERT INTO peeps (title, content, time, user_id) VALUES ($1, $2, $3, $4);"
-        params = [peep.title, peep.content, peep.time, @current_user]
         if peep.title.match(/[\/\\<>]/)
             peep.title = "stinky"
         end
         if peep.content.match(/[\/\\<>]/)
             peep.content = "stinky"
         end
+        params = [peep.title, peep.content, peep.time, @current_user]
         DatabaseConnection.exec_params(sql, params)
     end
 
