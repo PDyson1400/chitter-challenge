@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <title>Chitter Peep</title>
+  </head>
+  <body>
+    <div>
+        <% if @repo.current_user != 0 %>
+            <%= @repo.current_username %>
+        <% end %>
+    </div>
+    <div>
+        <% if @error != nil %>
+            <%= @error %>
+        <% end %>
+    </div>
+
+    <h1>Create your peep here:</h1>
+
+    <form action="/" method="POST">
+    <label>Title</label>
+    <input type="text" name="title">
+    <label>Content</label>
+    <input type="text" name="content">
+
+    <input type="submit" value="Submit the form">
+    </form>
+  </body>
+</html>

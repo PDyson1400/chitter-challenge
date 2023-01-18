@@ -1,0 +1,5 @@
+TRUNCATE TABLE users, peeps RESTART IDENTITY;
+
+INSERT INTO users (username, password, name, email) VALUES ('Doug1234', 'Doug1234!', 'Doug', 'Doug@gmail.com'), ('Username', 'Password4321?', 'Kevin', 'email@gmail.com'), ('Melody', '&231aa', 'Melody', 'Mels@gmail.com');
+
+INSERT INTO peeps (title, content, time, user_id) VALUES ('My day', 'My day was okay, thank you for asking everyone.', '2022-01-01 19:10:32', 1), ('stinky', 'My dad does not love me', '2022-02-22 03:01:09', 2), ('Promotion!', 'it happened at 12:21:12 it must be my lucky day!', '2022-03-06 15:51:15', 3), ('My day', 'My day was good, I won the lottery. Thank you for asking everyone.', '2022-05-10 19:10:32', 1), ('I was hired!', 'My dad has been so proud of me ever since I got the job, I think Im finally making him proud!', '2022-07-03 19:22:18', 2), ('I have made a decision', 'I have decided that I got the promotion because I worked hard, I will not discount the hard work and effort I put in to achieve it', '2022-09-09 15:51:15', 3);

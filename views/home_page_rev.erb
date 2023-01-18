@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <title>Chitter</title>
+  </head>
+  <body>
+    <div>
+        <% if @repo.current_user != 0 %>
+            <%= @repo.current_username %>
+            <a href="/post">Post a peep</a>
+            <a href="/sign_out">Sign out</a>
+        <% else %>
+            <a href="/sign_in">Sign in</a>
+        <% end %>
+        <form action='/'>
+            <button type="submit">Rev</button>
+        </form>
+    </div>
+
+    <div>
+        <% if @error != nil %>
+            <%= @error %>
+        <% end %>
+    </div>
+
+    <div>
+        <% if @repo.chrono_peeps != [] %>
+            <% @repo.chrono_peeps.reverse.each do |peep| %>
+                <h2><%= peep.title %> <%= @repo.username(peep.user_id) %></h2>
+                <p><%= peep.content %></p>
+                <a href='/peep/<%= peep.id %>'>More details</a>
+            <% end %>
+        <% end %>
+    </div>
+  </body>
+</html>

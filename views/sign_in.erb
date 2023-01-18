@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <title>Chitter Sign In</title>
+  </head>
+  <body>
+    <div>
+       <h4>Not already logged in? <a href="/sign_in/sign_up">Sign up</a></h4>
+    </div>
+
+    <div>
+        <% if @error != nil %>
+            <%= @error %>
+        <% end %>
+    </div>
+
+    <h1>Sign in here:</h1>
+
+    <form action="/" method="POST">
+    <label>Username</label>
+    <input type="text" name="username">
+    <label>Password</label>
+    <input type="text" name="password">
+
+    <input type="submit" value="Submit the form">
+    </form>
+  </body>
+</html>
