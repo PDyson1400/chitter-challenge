@@ -188,7 +188,7 @@ class Chitpository
             return "Enter a proper email"
         else
             sql = "INSERT INTO users (username, password, name, email) VALUES ($1, $2, $3, $4);"
-            params = [username, password, name, email]
+            params = [username, encrypt(password), name, email]
             DatabaseConnection.exec_params(sql, params)
             return "Sign up successful"
         end
@@ -201,14 +201,14 @@ class Chitpository
         if password.match(/[\/\\<>]/)
             password = "stinky"
         end
-        if @current_user != 0 || find_userid(username, password) == false
+        if @current_user != 0 || find_userid(username, encrypt(password)) == false
             return "Username or Password is incorrect"
         else
             sql = "UPDATE current SET current_user_id = $1 WHERE id = 1;"
-            params = [find_userid(username, password)]
+            params = [find_userid(username, encrypt(password))]
             DatabaseConnection.exec_params(sql, params)
             
-            @current_user = find_userid(username, password)
+            @current_user = find_userid(username, encrypt(password))
 
             return "Sign in successful"
         end
@@ -219,5 +219,104 @@ class Chitpository
         DatabaseConnection.exec_params(sql, [])
         @current_user = 0
         return "Sign out successful"
+    end
+
+    def sequence_solve(character, i=0, dir=0)
+        seq_char = "gqxaeryzovkcmsjfruhipdblnt"
+        seq_char_up = "PZDVYRQGKUNBCHMOXWTJLSFEIA"
+        seq_num = "4651827930"
+        seq_spec = "!*£$@?()&?"
+        
+        if dir == 0
+            if seq_char.include?(character)
+                index = seq_char.index(character)
+                index += i
+                if index >= seq_char.length
+                    index -= seq_char.length
+                end
+                return seq_char[index]
+            elsif seq_char_up.include?(character)
+                index = seq_char_up.index(character)
+                index += i
+                if index >= seq_char_up.length
+                    index -= seq_char_up.length
+                end
+                return seq_char_up[index]
+            elsif seq_num.include?(character)
+                index = seq_num.index(character)
+                index += i
+                if index >= seq_num.length
+                    index -= seq_num.length
+                end
+                return seq_num[index]
+            elsif seq_spec.include?(character)
+                index = seq_spec.index(character)
+                index += i
+                if index >= seq_spec.length
+                    index -= seq_spec.length
+                end
+                return seq_spec[index]
+            end
+        elsif dir == 1
+            if seq_char.include?(character)
+                index = seq_char.index(character)
+                index -= i
+                if index < 0
+                    index += seq_char.length
+                end
+                return seq_char[index]
+            elsif seq_char_up.include?(character)
+                index = seq_char_up.index(character)
+                index -= i
+                if index < 0
+                    index += seq_char_up.length
+                end
+                return seq_char[index]
+            elsif seq_num.include?(character)
+                index = seq_num.index(character)
+                index -= i
+                if index < 0
+                    index += seq_num.length
+                end
+                return seq_num[index]
+            elsif seq_spec.include?(character)
+                index = seq_spec.index(character)
+                index -= i
+                if index < 0
+                    index += seq_spec.length
+                end
+                return seq_spec[index]
+            end
+        end
+    end
+
+    def encrypt(password)
+        new_pw = ""
+        arr = password.split("")
+        i = 1
+        arr.each do |letter|
+            char = sequence_solve(letter, i, 0)
+            if char != nil
+                new_pw += char
+            end
+            i += 1
+        end
+
+        return new_pw
+    end
+
+    def decrypt(password)
+        new_pw = ""
+        arr = password.split("")
+        i = 1
+        arr.each do |letter|
+            char = sequence_solve(letter, i, 1)
+            if char != nil
+                new_pw += char
+            end
+            i += 1
+        end
+
+        return new_pw
     end
 end
