@@ -176,4 +176,12 @@ RSpec.describe "chitpository testing" do
             expect(repo.current_username).to eq "Nil"
         end
     end
+
+    context "testing user peeps" do
+        it "should run user peeps alright" do
+            repo = Chitpository.new
+            result = repo.user_peeps(1)
+            p result
+        end
+    end
 end

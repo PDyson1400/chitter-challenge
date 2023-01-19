@@ -16,6 +16,9 @@ class Application < Sinatra::Base
     get '/' do
         @repo = Chitpository.new
         @error = nil
+        if @repo.current_username == "Nil"
+            @repo.signout
+        end
         return erb(:home_page)
     end
 
@@ -83,5 +86,12 @@ class Application < Sinatra::Base
         @peep = repo.find_peep(params[:id])
         @username = repo.username(@peep.user_id)
         return erb(:details)
+    end
+
+    get '/user/:id' do
+        repo = Chitpository.new
+        @peeps = repo.user_peeps(params[:id])
+        @username = repo.username(params[:id])
+        return erb(:userpage)
     end
 end

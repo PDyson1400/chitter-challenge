@@ -60,6 +60,32 @@ class Chitpository
         return name['username']
     end
 
+    def get_user_id(username)
+        sql = "SELECT id FROM users WHERE username = $1"
+        return DatabaseConnection.exec_params(sql, [username])[0]['id']
+    end
+
+    def user_peeps(id)
+        sql = "SELECT * FROM peeps WHERE user_id = $1;"
+        params = [id]
+        results = DatabaseConnection.exec_params(sql, params)
+
+        peeps = []
+
+        results.each do |result|
+            peep = Peep.new
+            peep.id = result['id']
+            peep.title = result['title']
+            peep.content = result['content']
+            peep.time = result['time']
+            peep.user_id = result['user_id']
+
+            peeps.push(peep)
+        end
+
+        return peeps
+    end
+
     def email_exist?(email)
         sql = "SELECT email FROM users WHERE email = $1;"
         params = [email]

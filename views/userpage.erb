@@ -1,0 +1,19 @@
+<html>
+  <head>
+    <title><%= @username %> page</title>
+    <link href="/style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <h2><%= @username %> page</h2>
+    <div>
+        <% @peeps.each do |peep| %>
+            <div>
+                <h2><%= peep.title %></h2>
+                <p><%= peep.content %></p>
+                <p><a href='/peep/<%= peep.id %>'>More details</a></p>
+            </div>
+        <% end %>
+    </div>
+    <a href='/'>Return to home page</a>
+  </body>
+</html>

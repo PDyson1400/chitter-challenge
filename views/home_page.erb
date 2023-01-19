@@ -6,7 +6,7 @@
   <body>
     <ul class="user">
         <% if @repo.current_user != 0 %>
-            <img class="profilepic" src="/Profilepic.png" alt="profile picture" />
+            <a href="/user/<%= @repo.current_user %>"><img class="profilepic" src="/Profilepic.png" alt="profile picture" /></a>
             <li class="username"><%= @repo.current_username %></li>
             <li class="menu1"><a href="/post">Post a peep</a></li>
             <li class="menu2"><a href="/sign_out">Sign out</a></li>
@@ -26,7 +26,7 @@
         <% if @repo.chrono_peeps != [] %>
             <% @repo.chrono_peeps.each do |peep| %>
                 <div id ="peep<%= peep.id %>" class="peep">
-                <img class="userpic" src="/Profilepic.png" alt="profile picture" />
+                <a href="/user/<%= peep.user_id %>"><img class="userpic" src="/Profilepic.png" alt="profile picture" /></a>
                 <h2><%= peep.title %></h2>
                 <h3><%= @repo.username(peep.user_id) %></h2>
                 <p><%= peep.content %></p>
