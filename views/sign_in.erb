@@ -1,11 +1,12 @@
 <html>
   <head>
     <title>Chitter Sign In</title>
-    <link href="/style.css" rel="stylesheet" />
+    <link href="/sign_in.css" rel="stylesheet" />
   </head>
   <body>
     <div>
-       <h4>Not already logged in? <a href="/sign_in/sign_up">Sign up</a></h4>
+       <h2 class="sign_up">Not already logged in? <a href="/sign_in/sign_up">Sign up</a></h2>
+       <h2 class="home"><a href="/">Home</a></h2>
     </div>
 
     <div>
@@ -16,13 +17,13 @@
 
     <h1>Sign in here:</h1>
 
-    <form action="/" method="POST">
+    <form action="/" method="POST" class="sign_in">
     <label>Username</label>
     <input type="text" name="username">
     <label>Password</label>
     <input type="text" name="password">
 
-    <input type="submit" value="Submit the form">
+    <input type="submit" value="Sign in">
     </form>
   </body>
 </html>

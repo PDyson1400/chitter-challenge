@@ -1,0 +1,39 @@
+body {
+    background: rgb(67, 102, 120);
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+h1 {
+    text-align: center;
+    margin-top: 100px;
+}
+
+.sign_up {
+    background: rgb(29, 73, 68);
+    padding: 10px;
+    margin: auto;
+    color: rgb(51, 141, 93);
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+.home {
+    background: rgb(67, 163, 151);
+    max-width: 200px;
+    text-align: center;
+    margin-left: 100px;
+}
+
+a:link {
+    color: rgb(33, 61, 162);
+    text-decoration: none;
+  }
+  a:visited {
+    color: rgb(33, 61, 162);
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }

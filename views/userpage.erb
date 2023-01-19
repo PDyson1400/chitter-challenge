@@ -1,13 +1,13 @@
 <html>
   <head>
     <title><%= @username %> page</title>
-    <link href="/style.css" rel="stylesheet" />
+    <link href="/userpage.css" rel="stylesheet" />
   </head>
   <body>
     <h2><%= @username %> page</h2>
     <div>
         <% @peeps.each do |peep| %>
-            <div>
+            <div class="peep">
                 <h2><%= peep.title %></h2>
                 <p><%= peep.content %></p>
                 <p><a href='/peep/<%= peep.id %>'>More details</a></p>

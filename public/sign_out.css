@@ -1,0 +1,22 @@
+body {
+    background: rgb(67, 102, 120);
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+.sign_out {
+    text-align: center;
+    margin-top: 150px;
+}
+
+a:link {
+    color: rgb(33, 61, 162);
+    text-decoration: none;
+  }
+  a:visited {
+    color: rgb(33, 61, 162);
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
