@@ -1,20 +1,20 @@
 <html>
   <head>
     <title>Chitter</title>
+    <link href="/style.css" rel="stylesheet" />
   </head>
   <body>
-    <div>
+    <ul class="user">
         <% if @repo.current_user != 0 %>
-            <%= @repo.current_username %>
-            <a href="/post">Post a peep</a>
-            <a href="/sign_out">Sign out</a>
+            <img class="profilepic" src="/Profilepic.png" alt="profile picture" />
+            <li class="username"><%= @repo.current_username %></li>
+            <li class="menu1"><a href="/post">Post a peep</a></li>
+            <li class="menu2"><a href="/sign_out">Sign out</a></li>
         <% else %>
-            <a href="/sign_in">Sign in</a>
+            <li class="menu1"><a href="/sign_in">Sign in</a></li>
         <% end %>
-        <form action='/rev'>
-            <button type="submit">Rev</button>
-        </form>
-    </div>
+        <li class="menu3"><a href="/rev">Reverse order</a></li>
+    </ul>
 
     <div>
         <% if @error != nil %>
@@ -25,9 +25,13 @@
     <div>
         <% if @repo.chrono_peeps != [] %>
             <% @repo.chrono_peeps.each do |peep| %>
-                <h2><%= peep.title %> <%= @repo.username(peep.user_id) %></h2>
+                <div id ="peep<%= peep.id %>" class="peep">
+                <img class="userpic" src="/Profilepic.png" alt="profile picture" />
+                <h2><%= peep.title %></h2>
+                <h3><%= @repo.username(peep.user_id) %></h2>
                 <p><%= peep.content %></p>
-                <a href='/peep/<%= peep.id %>'>More details</a>
+                <p><a href='/peep/<%= peep.id %>'>More details</a></p>
+                </div>
             <% end %>
         <% end %>
     </div>
