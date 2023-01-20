@@ -1,5 +1,6 @@
 require_relative './peeps'
 require_relative './users'
+require_relative './comments'
 
 class Chitpository
     def initialize
@@ -61,7 +62,7 @@ class Chitpository
     end
 
     def get_user_id(username)
-        sql = "SELECT id FROM users WHERE username = $1"
+        sql = "SELECT id FROM users WHERE username = $1;"
         return DatabaseConnection.exec_params(sql, [username])[0]['id']
     end
 
@@ -140,6 +141,15 @@ class Chitpository
         DatabaseConnection.exec_params(sql, params)
     end
 
+    def post_comment(comment)
+        sql = "INSERT INTO comments (user_id, content, peep_id) VALUES ($1, $2, $3);"
+        if comment.content.match(/[\/\\<>]/)
+            peep.title = "stinky"
+        end
+        params = [comment.user_id, comment.content, comment.peep_id]
+        DatabaseConnection.exec_params(sql, params)
+    end
+
     def delete(id)
         sql = "DELETE FROM peeps WHERE id = $1;"
         params = [id]
@@ -184,6 +194,25 @@ class Chitpository
         end
 
         return peeplist
+    end
+
+    def peep_comments(id)
+        sql = "SELECT * FROM comments WHERE peep_id = $1;"
+        params = [id]
+        result = DatabaseConnection.exec_params(sql, params)
+
+        comments = []
+
+        result.each do |reply|
+            comment = Comment.new
+            comment.id = reply['id']
+            comment.user_id = reply['user_id']
+            comment.content = reply['content']
+            comment.peep_id = reply['peep_id']
+            comments.push(comment)
+        end
+
+        return comments
     end
 
     def time(id)

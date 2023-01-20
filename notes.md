@@ -31,3 +31,13 @@ CREATE TABLE peeps (
     references users(id)
     on delete cascade
 );
+
+CREATE TABLE comments (
+  id SERIAL PRIMARY KEY,
+  user_id int,
+  content text,
+  peep_id int,
+  constraint fk_peep foreign key(peep_id)
+    references peeps(id)
+    on delete cascade
+);

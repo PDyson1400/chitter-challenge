@@ -5,6 +5,7 @@
   </head>
   <body>
     <h2><%= @username %> page</h2>
+    <a class="home" href='/'>Return to home page</a>
     <div>
         <% @peeps.each do |peep| %>
             <div class="peep">
@@ -14,6 +15,6 @@
             </div>
         <% end %>
     </div>
-    <a href='/'>Return to home page</a>
+    
   </body>
 </html>

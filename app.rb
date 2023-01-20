@@ -82,9 +82,25 @@ class Application < Sinatra::Base
     end
 
     get '/peep/:id' do
-        repo = Chitpository.new
-        @peep = repo.find_peep(params[:id])
-        @username = repo.username(@peep.user_id)
+        @repo = Chitpository.new
+        @peep = @repo.find_peep(params[:id])
+        @username = @repo.username(@peep.user_id)
+        @comments = @repo.peep_comments(params[:id])
+        return erb(:details)
+    end
+
+    post '/peep/:id' do
+        @repo = Chitpository.new
+        comment = Comment.new
+        comment.user_id = @repo.current_user
+        comment.content = params[:content]
+        comment.peep_id = params[:id]
+        @repo.post_comment(comment)
+
+        @peep = @repo.find_peep(params[:id])
+        @username = @repo.username(@peep.user_id)
+        @comments = @repo.peep_comments(params[:id])
+
         return erb(:details)
     end
 

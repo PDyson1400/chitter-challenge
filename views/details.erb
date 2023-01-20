@@ -4,14 +4,37 @@
     <link href="/details.css" rel="stylesheet" />
   </head>
   <body>
-
+    <h2 class="home"><a href="/">Home</a></h2>
     <div class="peep_details">
-        <h3><%= @peep.title %></h3>
+        <h2><%= @peep.title %></h3>
         <h3><%= @username %></h3>
         <p><%= @peep.content %></p>
         <p><%= @peep.time %></p>
     </div>
+
+    <div class="comment_section">
+        <div class="post_comment_div">
+          <% if @repo.current_user != 0 %>
+            <form class="post_comment" action="/peep/<%= @peep.id %>" method="POST">
+              <h2>Leave a comment!</h2>
+              <input class="comment_text" type="textarea" name="content"></textarea>
+              <input type="submit" class="post" value="Post"></input>
+            </form>
+          <% else %>
+            <div class="post_comment">
+              <h2>Leave a comment!</h2>
+              <h3>Please <a href="/sign_in">sign in</a> to comment</h3>
+            </div>
+          <% end %>
+          
+        </div>
+        <% @comments.each do |comment| %>
+          <div class="comment">
+          <h3><%= @repo.username(comment.user_id) %></h3>
+          <p><%= comment.content %></p>
+          </div>
+        <% end %>
+    </div>
     
-    <a href='/'>Return to home page</a>
   </body>
 </html>
