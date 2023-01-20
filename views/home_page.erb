@@ -27,10 +27,12 @@
             <% @repo.chrono_peeps.each do |peep| %>
                 <div id ="peep<%= peep.id %>" class="peep">
                 <a href="/user/<%= peep.user_id %>"><img class="userpic" src="/Profilepic.png" alt="profile picture" /></a>
-                <h2><%= peep.title %></h2>
-                <h3><%= @repo.username(peep.user_id) %></h2>
-                <p><%= peep.content %></p>
-                <p><a href='/peep/<%= peep.id %>'>More details</a></p>
+                    <div class="peep_content">
+                        <h2><%= peep.title %></h2>
+                        <h3><%= @repo.username(peep.user_id) %></h2>
+                        <p><%= peep.content %></p>
+                        <p><a href='/peep/<%= peep.id %>'>More details</a></p>
+                    </div>
                 </div>
             <% end %>
         <% end %>

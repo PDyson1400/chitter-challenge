@@ -12,6 +12,10 @@ Post peep - GET /post
 Peep posted - POST /
 
 
+CREATE TABLE current (
+  id SERIAL PRIMARY KEY,
+  current_user_id int
+);
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
